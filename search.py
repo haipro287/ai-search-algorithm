@@ -4,7 +4,7 @@
 # educational purposes provided that (1) you do not distribute or publish
 # solutions, (2) you retain this notice, and (3) you provide clear
 # attribution to UC Berkeley, including a link to http://ai.berkeley.edu.
-# 
+#
 # Attribution Information: The Pacman AI projects were developed at UC Berkeley.
 # The core projects and autograders were primarily created by John DeNero
 # (denero@cs.berkeley.edu) and Dan Klein (klein@cs.berkeley.edu).
@@ -87,17 +87,59 @@ def depthFirstSearch(problem):
     print "Start's successors:", problem.getSuccessors(problem.getStartState())
     """
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    stack = util.Stack()
+    stack.push((problem.getStartState(), []))
+    visited = list() 
+    while not stack.isEmpty():
+        currentState, actions = stack.pop()
+        if currentState in visited:
+            continue
+        visited.append(currentState)
+        if problem.isGoalState(currentState):
+            return actions
+        successors = problem.getSuccessors(currentState)
+        for state, action, cost in successors:
+                newActions = actions + [action]
+                stack.push((state, newActions))
+    return []
 
 def breadthFirstSearch(problem):
     """Search the shallowest nodes in the search tree first."""
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    queue = util.Queue()
+    queue.push((problem.getStartState(), []))
+    visited = list()
+    while not queue.isEmpty():
+        currentState, actions = queue.pop()
+        if currentState in visited:
+            continue
+        visited.append (currentState)
+        if problem.isGoalState(currentState):
+            return actions
+        successors = problem.getSuccessors(currentState)
+        for state, action, cost in successors:
+            newActions = actions + [action]
+            queue.push((state, newActions))
+    return []
 
 def uniformCostSearch(problem):
     """Search the node of least total cost first."""
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    priQueue = util.PriorityQueue()
+    priQueue.update((problem.getStartState(), []), 0)
+    visited = list()
+    while not priQueue.isEmpty():
+        currentState, actions = priQueue.pop()
+        if currentState in visited:
+            continue
+        visited.append(currentState)
+        if problem.isGoalState(currentState):
+            return actions
+        successors = problem.getSuccessors(currentState)
+        for state, action, cost in successors:
+            newActions = actions + [action]
+            priQueue.update((state, newActions), problem.getCostOfActions(newActions))
+    return []
 
 def nullHeuristic(state, problem=None):
     """
@@ -109,8 +151,21 @@ def nullHeuristic(state, problem=None):
 def aStarSearch(problem, heuristic=nullHeuristic):
     """Search the node that has the lowest combined cost and heuristic first."""
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
-
+    priQueue = util.PriorityQueue()
+    priQueue.update((problem.getStartState(), []), 0)
+    visited = list()
+    while not priQueue.isEmpty():
+        currentState, actions = priQueue.pop()
+        if currentState in visited:
+            continue
+        visited.append(currentState)
+        if problem.isGoalState(currentState):
+            return actions
+        successors = problem.getSuccessors(currentState)
+        for state, action, cost in successors:
+            newActions = actions + [action]
+            priQueue.update((state, newActions), problem.getCostOfActions(newActions) + heuristic(state, problem))
+    return []
 
 # Abbreviations
 bfs = breadthFirstSearch
