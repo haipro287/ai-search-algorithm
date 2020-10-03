@@ -158,3 +158,14 @@ ai project 2020
                 if heuristic > maxHeuristic:
                     maxHeuristic = heuristic
         return maxHeuristic # Default to trivial solution
+
+## Q8: AnyFoodSearchProblem
+    //findPathToClosestDot(problem)
+        sử dụng BFS để tìm đường
+    //isGoalState(state)
+    
+        //kiểm tra xem đã ăn hết chưa
+        if state in foodList:
+            return True
+        else:
+            return False
