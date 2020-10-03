@@ -382,6 +382,7 @@ def cornersHeuristic(state, problem):
     maxHeuristic = 0
     for i in range(0, 3):
         if currrentCornersStatus[i] == 0:
+            # using manhattan distance
             heuristic = ((abs(corners[i][0] - currentPosition[0]) + abs(corners[i][1] - currentPosition[1])))  
             if heuristic > maxHeuristic:
                 maxHeuristic = heuristic
@@ -480,7 +481,7 @@ def foodHeuristic(state, problem):
     position, foodGrid = state
     "*** YOUR CODE HERE ***"
     
-    
+
 
     return 0
 
@@ -513,7 +514,10 @@ class ClosestDotSearchAgent(SearchAgent):
         problem = AnyFoodSearchProblem(gameState)
 
         "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        from search import breadthFirstSearch
+
+        return breadthFirstSearch(problem)
+        
 
 class AnyFoodSearchProblem(PositionSearchProblem):
     """
@@ -549,7 +553,11 @@ class AnyFoodSearchProblem(PositionSearchProblem):
         x,y = state
 
         "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        foodList = self.food.asList()
+        if state in foodList:
+            return True
+        else:
+            return False
 
 def mazeDistance(point1, point2, gameState):
     """

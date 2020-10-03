@@ -99,8 +99,8 @@ def depthFirstSearch(problem):
             return actions
         successors = problem.getSuccessors(currentState)
         for state, action, cost in successors:
-                newActions = actions + [action]
-                stack.push((state, newActions))
+            newActions = actions + [action]
+            stack.push((state, newActions))
     return []
 
 def breadthFirstSearch(problem):
