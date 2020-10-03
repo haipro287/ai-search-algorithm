@@ -159,6 +159,27 @@ ai project 2020
                     maxHeuristic = heuristic
         return maxHeuristic # Default to trivial solution
 
+## Q7: EatingAllTheDotsProblem
+    //foodHeuristic(state, problem)
+    
+        position, foodGrid = state
+    "*** YOUR CODE HERE ***"
+    
+    heuristic = 0
+
+    maxheuristic = 0 
+    
+    //tìm khoảng cách từ vị trí hiện tại đến tất cả các thức ăn bằng manhattan và trả về giá trị cao nhất
+        //giải thích:
+        //    coi như thức ăn xa nhất đó sẽ là điểm cuối cùng đi tới (đạt đc goalState) 
+        //    như vậy giá trị về khoảng cách đó sẽ tương đối chính xác đến goalState
+    for item in foodGrid.asList():
+        heuristic = ((abs(item[0] - position[0]) + abs(item[1] - position[1]))) 
+        if(heuristic > maxheuristic):
+            maxheuristic = heuristic
+
+    return maxheuristic
+
 ## Q8: AnyFoodSearchProblem
     //findPathToClosestDot(problem)
         sử dụng BFS để tìm đường
