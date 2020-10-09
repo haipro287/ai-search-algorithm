@@ -1,6 +1,6 @@
 # ai-search-algorithm
 
-ai project 2020
+search algorithm project in ai-2020
 
 ## Q1: Hàm DFS
     //Sử dụng stack để lưu các state mới tìm thấy
